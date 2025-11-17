@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
- * @author Kozakura
+ * @author BLAXK
  */
+
 public class ColorMixer extends javax.swing.JFrame {
 
     /**
@@ -14,6 +10,10 @@ public class ColorMixer extends javax.swing.JFrame {
      */
     public ColorMixer() {
         initComponents();
+        MixedColor();
+        setRedColorInputTextField();
+        setGreenColorInputTextField();
+        setBlueColorInputTextField();
     }
 
     /**
@@ -25,23 +25,381 @@ public class ColorMixer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MainPartPanel = new javax.swing.JPanel();
+        AdjustColorPartPanel = new javax.swing.JPanel();
+        RedColorLabel = new javax.swing.JLabel();
+        RedColorInputLabel = new javax.swing.JLabel();
+        GreenColorLabel = new javax.swing.JLabel();
+        GreenColorInputLabel = new javax.swing.JLabel();
+        BlueColorLabel = new javax.swing.JLabel();
+        BlueColorInputLabel = new javax.swing.JLabel();
+        RedColorSlider = new javax.swing.JSlider();
+        GreenColorSlider = new javax.swing.JSlider();
+        BlueColorSlider = new javax.swing.JSlider();
+        RedColorInputTextField = new javax.swing.JTextField();
+        GreenColorInputTextField = new javax.swing.JTextField();
+        BlueColorInputTextField = new javax.swing.JTextField();
+        MixingColorPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Color Mixer");
         setResizable(false);
+
+        MainPartPanel.setBackground(new java.awt.Color(102, 102, 102));
+
+        AdjustColorPartPanel.setBackground(new java.awt.Color(255, 255, 255));
+        AdjustColorPartPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+
+        RedColorLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        RedColorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        RedColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RedColorLabel.setText("R");
+        RedColorLabel.setToolTipText("");
+
+        RedColorInputLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        RedColorInputLabel.setForeground(new java.awt.Color(255, 51, 51));
+        RedColorInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RedColorInputLabel.setText("R");
+        RedColorInputLabel.setToolTipText("");
+
+        GreenColorLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        GreenColorLabel.setForeground(new java.awt.Color(51, 255, 0));
+        GreenColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        GreenColorLabel.setText("G");
+        GreenColorLabel.setToolTipText("");
+
+        GreenColorInputLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        GreenColorInputLabel.setForeground(new java.awt.Color(51, 255, 0));
+        GreenColorInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        GreenColorInputLabel.setText("G");
+        GreenColorInputLabel.setToolTipText("");
+
+        BlueColorLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        BlueColorLabel.setForeground(new java.awt.Color(0, 0, 255));
+        BlueColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BlueColorLabel.setText("B");
+        BlueColorLabel.setToolTipText("");
+
+        BlueColorInputLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        BlueColorInputLabel.setForeground(new java.awt.Color(0, 0, 255));
+        BlueColorInputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BlueColorInputLabel.setText("B");
+        BlueColorInputLabel.setToolTipText("");
+
+        RedColorSlider.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        RedColorSlider.setForeground(new java.awt.Color(0, 0, 0));
+        RedColorSlider.setMajorTickSpacing(10);
+        RedColorSlider.setMaximum(255);
+        RedColorSlider.setMinorTickSpacing(5);
+        RedColorSlider.setPaintLabels(true);
+        RedColorSlider.setPaintTicks(true);
+        RedColorSlider.setToolTipText("");
+        RedColorSlider.setValue(255);
+        RedColorSlider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        RedColorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                RedColorSliderStateChanged(evt);
+            }
+        });
+
+        GreenColorSlider.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        GreenColorSlider.setForeground(new java.awt.Color(0, 0, 0));
+        GreenColorSlider.setMajorTickSpacing(10);
+        GreenColorSlider.setMaximum(255);
+        GreenColorSlider.setMinorTickSpacing(5);
+        GreenColorSlider.setPaintLabels(true);
+        GreenColorSlider.setPaintTicks(true);
+        GreenColorSlider.setToolTipText("");
+        GreenColorSlider.setValue(255);
+        GreenColorSlider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 0)));
+        GreenColorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                GreenColorSliderStateChanged(evt);
+            }
+        });
+
+        BlueColorSlider.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        BlueColorSlider.setForeground(new java.awt.Color(0, 0, 0));
+        BlueColorSlider.setMajorTickSpacing(10);
+        BlueColorSlider.setMaximum(255);
+        BlueColorSlider.setMinorTickSpacing(5);
+        BlueColorSlider.setPaintLabels(true);
+        BlueColorSlider.setPaintTicks(true);
+        BlueColorSlider.setToolTipText("");
+        BlueColorSlider.setValue(0);
+        BlueColorSlider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+        BlueColorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                BlueColorSliderStateChanged(evt);
+            }
+        });
+
+        RedColorInputTextField.setBackground(new java.awt.Color(0, 0, 0));
+        RedColorInputTextField.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        RedColorInputTextField.setForeground(new java.awt.Color(255, 255, 255));
+        RedColorInputTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        RedColorInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                RedColorInputTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                RedColorInputTextFieldKeyTyped(evt);
+            }
+        });
+
+        GreenColorInputTextField.setBackground(new java.awt.Color(0, 0, 0));
+        GreenColorInputTextField.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        GreenColorInputTextField.setForeground(new java.awt.Color(255, 255, 255));
+        GreenColorInputTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        GreenColorInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GreenColorInputTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                GreenColorInputTextFieldKeyTyped(evt);
+            }
+        });
+
+        BlueColorInputTextField.setBackground(new java.awt.Color(0, 0, 0));
+        BlueColorInputTextField.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BlueColorInputTextField.setForeground(new java.awt.Color(255, 255, 255));
+        BlueColorInputTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        BlueColorInputTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BlueColorInputTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BlueColorInputTextFieldKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AdjustColorPartPanelLayout = new javax.swing.GroupLayout(AdjustColorPartPanel);
+        AdjustColorPartPanel.setLayout(AdjustColorPartPanelLayout);
+        AdjustColorPartPanelLayout.setHorizontalGroup(
+            AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdjustColorPartPanelLayout.createSequentialGroup()
+                .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AdjustColorPartPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdjustColorPartPanelLayout.createSequentialGroup()
+                                .addComponent(RedColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RedColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdjustColorPartPanelLayout.createSequentialGroup()
+                                .addComponent(GreenColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(GreenColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AdjustColorPartPanelLayout.createSequentialGroup()
+                                .addComponent(BlueColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BlueColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(AdjustColorPartPanelLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(RedColorInputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RedColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(GreenColorInputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(GreenColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(BlueColorInputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BlueColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        AdjustColorPartPanelLayout.setVerticalGroup(
+            AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdjustColorPartPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RedColorLabel)
+                    .addComponent(RedColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GreenColorLabel)
+                    .addComponent(GreenColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BlueColorLabel)
+                    .addComponent(BlueColorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(AdjustColorPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RedColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GreenColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BlueColorInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RedColorInputLabel)
+                    .addComponent(GreenColorInputLabel)
+                    .addComponent(BlueColorInputLabel))
+                .addContainerGap())
+        );
+
+        MixingColorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MixingColorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mixing Color", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        javax.swing.GroupLayout MixingColorPanelLayout = new javax.swing.GroupLayout(MixingColorPanel);
+        MixingColorPanel.setLayout(MixingColorPanelLayout);
+        MixingColorPanelLayout.setHorizontalGroup(
+            MixingColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        MixingColorPanelLayout.setVerticalGroup(
+            MixingColorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 143, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout MainPartPanelLayout = new javax.swing.GroupLayout(MainPartPanel);
+        MainPartPanel.setLayout(MainPartPanelLayout);
+        MainPartPanelLayout.setHorizontalGroup(
+            MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPartPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(MixingColorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AdjustColorPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        MainPartPanelLayout.setVerticalGroup(
+            MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPartPanelLayout.createSequentialGroup()
+                .addComponent(AdjustColorPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(MixingColorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(MainPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(MainPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
+    private int toInteger(String val) {
+        return Integer.parseInt(val);
+    }
+    
+    private void NumberOnly(java.awt.event.KeyEvent evt) {
+        char val = evt.getKeyChar();
+        if (!Character.isDigit(val)) {
+            evt.consume();
+        }
+    }
+   
+    private int isEmptyValue(String val) {
+        if(val.isEmpty()) {
+            return 0;
+        }
+        return toInteger(val);
+    }
+    
+    private void setMixingColorPanel(java.awt.Color color) {
+        MixingColorPanel.setBackground(color);
+    }
+    
+    private void setRedColorInputTextField() {
+         RedColorInputTextField.setText(Integer.toString(getRedColorSlider()));
+    }
+    
+    private void setGreenColorInputTextField() {
+        GreenColorInputTextField.setText(Integer.toString(getGreenColorSlider()));
+    }
+    
+    private void setBlueColorInputTextField() {
+        BlueColorInputTextField.setText(Integer.toString(getBlueColorSlider()));
+    }
+    
+    private void setRedColorSliderValue() {
+        RedColorSlider.setValue(isEmptyValue(getRedColorInputTextField()));
+    }
+    
+    private void setGreenColorSliderValue() {
+        GreenColorSlider.setValue(isEmptyValue(getGreenColorInputTextField()));
+    }
+    
+    private void setBlueColorSliderValue() {
+        BlueColorSlider.setValue(isEmptyValue(getBlueColorInputTextField()));
+    }
+    
+    public String getRedColorInputTextField() {
+        return RedColorInputTextField.getText();
+    }
+    
+    public String getGreenColorInputTextField() {
+        return GreenColorInputTextField.getText();
+    }
+    
+    public String getBlueColorInputTextField() {
+        return BlueColorInputTextField.getText();
+    }
+    
+    public int getRedColorSlider() {
+        return RedColorSlider.getValue();
+    }
+    
+    public int getGreenColorSlider() {
+        return GreenColorSlider.getValue();
+    }
+    
+    public int getBlueColorSlider() {
+        return BlueColorSlider.getValue();
+    }
+    
+            
+    public void MixedColor() {
+        setMixingColorPanel(new java.awt.Color(
+                getRedColorSlider(), 
+                getGreenColorSlider(), 
+                getBlueColorSlider()
+        ));
+    }
+    
+    private void RedColorSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RedColorSliderStateChanged
+        setRedColorInputTextField();
+        MixedColor();
+    }//GEN-LAST:event_RedColorSliderStateChanged
+
+    private void GreenColorSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_GreenColorSliderStateChanged
+        setGreenColorInputTextField();
+        MixedColor();
+    }//GEN-LAST:event_GreenColorSliderStateChanged
+
+    private void BlueColorSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_BlueColorSliderStateChanged
+        setBlueColorInputTextField();
+        MixedColor();
+    }//GEN-LAST:event_BlueColorSliderStateChanged
+
+    private void RedColorInputTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RedColorInputTextFieldKeyReleased
+        setRedColorSliderValue();
+    }//GEN-LAST:event_RedColorInputTextFieldKeyReleased
+
+    private void GreenColorInputTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GreenColorInputTextFieldKeyReleased
+        setGreenColorSliderValue();
+    }//GEN-LAST:event_GreenColorInputTextFieldKeyReleased
+
+    private void BlueColorInputTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BlueColorInputTextFieldKeyReleased
+        setBlueColorSliderValue();
+    }//GEN-LAST:event_BlueColorInputTextFieldKeyReleased
+
+    private void RedColorInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RedColorInputTextFieldKeyTyped
+        NumberOnly(evt);
+    }//GEN-LAST:event_RedColorInputTextFieldKeyTyped
+
+    private void GreenColorInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GreenColorInputTextFieldKeyTyped
+        NumberOnly(evt);
+    }//GEN-LAST:event_GreenColorInputTextFieldKeyTyped
+
+    private void BlueColorInputTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BlueColorInputTextFieldKeyTyped
+        NumberOnly(evt);
+    }//GEN-LAST:event_BlueColorInputTextFieldKeyTyped
 
     /**
      * @param args the command line arguments
@@ -79,5 +437,20 @@ public class ColorMixer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AdjustColorPartPanel;
+    private javax.swing.JLabel BlueColorInputLabel;
+    private javax.swing.JTextField BlueColorInputTextField;
+    private javax.swing.JLabel BlueColorLabel;
+    private javax.swing.JSlider BlueColorSlider;
+    private javax.swing.JLabel GreenColorInputLabel;
+    private javax.swing.JTextField GreenColorInputTextField;
+    private javax.swing.JLabel GreenColorLabel;
+    private javax.swing.JSlider GreenColorSlider;
+    private javax.swing.JPanel MainPartPanel;
+    private javax.swing.JPanel MixingColorPanel;
+    private javax.swing.JLabel RedColorInputLabel;
+    private javax.swing.JTextField RedColorInputTextField;
+    private javax.swing.JLabel RedColorLabel;
+    private javax.swing.JSlider RedColorSlider;
     // End of variables declaration//GEN-END:variables
 }
