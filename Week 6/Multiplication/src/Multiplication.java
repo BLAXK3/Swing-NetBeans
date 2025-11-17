@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
- * @author Kozakura
+ * @author BLAXK
  */
+
 public class Multiplication extends javax.swing.JFrame {
 
     /**
@@ -25,78 +21,409 @@ public class Multiplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        MainPartPanel = new javax.swing.JPanel();
+        MultiplicandLabel = new javax.swing.JLabel();
+        MultiplierLabel = new javax.swing.JLabel();
+        SubtractLabel = new javax.swing.JLabel();
+        MultiplicandTextField = new javax.swing.JTextField();
+        MultiplierTextField = new javax.swing.JTextField();
+        SubtractTextField = new javax.swing.JTextField();
+        ShowButton = new javax.swing.JButton();
+        ClearButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
+        MultiResultPartPanel = new javax.swing.JPanel();
+        MultiResultLabel = new javax.swing.JLabel();
+        MultiResultScrollPane = new javax.swing.JScrollPane();
+        MultiResultTextArea = new javax.swing.JTextArea();
+        SubtractPartPanel = new javax.swing.JPanel();
+        SubtractResultLabel = new javax.swing.JLabel();
+        SubtractResultScrollPane = new javax.swing.JScrollPane();
+        SuctractResultTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Multiplication");
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        MainPartPanel.setBackground(new java.awt.Color(102, 255, 204));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        MultiplicandLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        MultiplicandLabel.setForeground(new java.awt.Color(0, 0, 0));
+        MultiplicandLabel.setText("Multiplicand :");
 
-        jLabel1.setText("jLabel1");
+        MultiplierLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        MultiplierLabel.setForeground(new java.awt.Color(0, 0, 0));
+        MultiplierLabel.setText("Multiplier :");
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("jTextField1");
-        jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        SubtractLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        SubtractLabel.setForeground(new java.awt.Color(0, 0, 0));
+        SubtractLabel.setText("Subtract :");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        MultiplicandTextField.setBackground(new java.awt.Color(255, 255, 255));
+        MultiplicandTextField.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        MultiplicandTextField.setForeground(new java.awt.Color(0, 0, 0));
+        MultiplicandTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MultiplicandTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                MultiplicandTextFieldKeyTyped(evt);
+            }
+        });
+
+        MultiplierTextField.setBackground(new java.awt.Color(255, 255, 255));
+        MultiplierTextField.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        MultiplierTextField.setForeground(new java.awt.Color(0, 0, 0));
+        MultiplierTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MultiplierTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                MultiplierTextFieldKeyTyped(evt);
+            }
+        });
+
+        SubtractTextField.setBackground(new java.awt.Color(255, 255, 255));
+        SubtractTextField.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        SubtractTextField.setForeground(new java.awt.Color(0, 0, 0));
+        SubtractTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SubtractTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SubtractTextFieldKeyTyped(evt);
+            }
+        });
+
+        ShowButton.setBackground(new java.awt.Color(0, 153, 255));
+        ShowButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        ShowButton.setForeground(new java.awt.Color(0, 0, 0));
+        ShowButton.setText("Show");
+        ShowButton.setBorder(new javax.swing.border.MatteBorder(null));
+        ShowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowButtonActionPerformed(evt);
+            }
+        });
+
+        ClearButton.setBackground(new java.awt.Color(255, 255, 0));
+        ClearButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        ClearButton.setForeground(new java.awt.Color(0, 0, 0));
+        ClearButton.setText("Clear");
+        ClearButton.setBorder(new javax.swing.border.MatteBorder(null));
+        ClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearButtonActionPerformed(evt);
+            }
+        });
+
+        ExitButton.setBackground(new java.awt.Color(250, 51, 51));
+        ExitButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        ExitButton.setForeground(new java.awt.Color(0, 0, 0));
+        ExitButton.setText("Exit");
+        ExitButton.setBorder(new javax.swing.border.MatteBorder(null));
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
+            }
+        });
+
+        MultiResultPartPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        MultiResultLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        MultiResultLabel.setForeground(new java.awt.Color(0, 0, 0));
+        MultiResultLabel.setText("Multiplication result");
+
+        MultiResultScrollPane.setBorder(null);
+
+        MultiResultTextArea.setEditable(false);
+        MultiResultTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        MultiResultTextArea.setColumns(20);
+        MultiResultTextArea.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        MultiResultTextArea.setForeground(new java.awt.Color(0, 0, 0));
+        MultiResultTextArea.setLineWrap(true);
+        MultiResultTextArea.setRows(5);
+        MultiResultTextArea.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        MultiResultTextArea.setFocusable(false);
+        MultiResultScrollPane.setViewportView(MultiResultTextArea);
+
+        javax.swing.GroupLayout MultiResultPartPanelLayout = new javax.swing.GroupLayout(MultiResultPartPanel);
+        MultiResultPartPanel.setLayout(MultiResultPartPanelLayout);
+        MultiResultPartPanelLayout.setHorizontalGroup(
+            MultiResultPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MultiResultPartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(MultiResultPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MultiResultScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                    .addGroup(MultiResultPartPanelLayout.createSequentialGroup()
+                        .addComponent(MultiResultLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        MultiResultPartPanelLayout.setVerticalGroup(
+            MultiResultPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MultiResultPartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(MultiResultLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addComponent(MultiResultScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(201, 201, 201))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        SubtractPartPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        SubtractResultLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        SubtractResultLabel.setForeground(new java.awt.Color(0, 0, 0));
+        SubtractResultLabel.setText("Subtraction Result");
+
+        SubtractResultScrollPane.setBorder(null);
+
+        SuctractResultTextArea.setEditable(false);
+        SuctractResultTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        SuctractResultTextArea.setColumns(20);
+        SuctractResultTextArea.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        SuctractResultTextArea.setForeground(new java.awt.Color(0, 0, 0));
+        SuctractResultTextArea.setLineWrap(true);
+        SuctractResultTextArea.setRows(5);
+        SuctractResultTextArea.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        SuctractResultTextArea.setFocusable(false);
+        SubtractResultScrollPane.setViewportView(SuctractResultTextArea);
+
+        javax.swing.GroupLayout SubtractPartPanelLayout = new javax.swing.GroupLayout(SubtractPartPanel);
+        SubtractPartPanel.setLayout(SubtractPartPanelLayout);
+        SubtractPartPanelLayout.setHorizontalGroup(
+            SubtractPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SubtractPartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SubtractPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SubtractResultScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                    .addGroup(SubtractPartPanelLayout.createSequentialGroup()
+                        .addComponent(SubtractResultLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+        );
+        SubtractPartPanelLayout.setVerticalGroup(
+            SubtractPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SubtractPartPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SubtractResultLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SubtractResultScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout MainPartPanelLayout = new javax.swing.GroupLayout(MainPartPanel);
+        MainPartPanel.setLayout(MainPartPanelLayout);
+        MainPartPanelLayout.setHorizontalGroup(
+            MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPartPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(MainPartPanelLayout.createSequentialGroup()
+                            .addComponent(MultiplicandLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(MultiplicandTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(MainPartPanelLayout.createSequentialGroup()
+                            .addComponent(MultiplierLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(MultiplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(MainPartPanelLayout.createSequentialGroup()
+                            .addComponent(SubtractLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SubtractTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ExitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
+                .addComponent(SubtractPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(MainPartPanelLayout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(ShowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(383, Short.MAX_VALUE)))
+            .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(MainPartPanelLayout.createSequentialGroup()
+                    .addGap(225, 225, 225)
+                    .addComponent(MultiResultPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(240, Short.MAX_VALUE)))
+        );
+        MainPartPanelLayout.setVerticalGroup(
+            MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPartPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainPartPanelLayout.createSequentialGroup()
+                        .addComponent(SubtractPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(MainPartPanelLayout.createSequentialGroup()
+                        .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MultiplicandLabel)
+                            .addComponent(MultiplicandTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MultiplierLabel)
+                            .addComponent(MultiplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SubtractLabel)
+                            .addComponent(SubtractTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))))
+            .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPartPanelLayout.createSequentialGroup()
+                    .addContainerGap(242, Short.MAX_VALUE)
+                    .addComponent(ShowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(203, 203, 203)))
+            .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPartPanelLayout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(MultiResultPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(15, 15, 15)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public int toInteger(String text) {
+        return Integer.parseInt(removeComma(text));
+    }
+    
+    public String removeComma(String text) {
+        return text.replace(",", "");
+    }
+    
+    private void numberOnly(java.awt.event.KeyEvent evt) {
+        char val = evt.getKeyChar();
+        if (!Character.isDigit(val)) {
+            evt.consume();
+        }
+    }
+    
+    private void showResult(javax.swing.JTextField[] textField) {
+            if(textField[0].getText().isEmpty() || 
+                    textField[1].getText().isEmpty() || 
+                    textField[2].getText().isEmpty())  {
+                javax.swing.JOptionPane.showMessageDialog(this,  "Enter number in the field!", "Input Required", 2);
+            }
+            else {
+                setMultiResultTextArea(
+                        removeComma(getMultiplicandTextField()),
+                            removeComma(getMultiplierTextField())
+                );
+                setSuctractResultTextArea(
+                        removeComma(getMultiplicandTextField()),
+                        removeComma(getSubtractTextField()));
+            }
+    }
+    
+    private void clearComponent() {
+        setMultiplicandTextField("");
+        setMultiplierTextField("");
+        setSubstractTextField("");         
+        MultiResultTextArea.setText("");
+        SuctractResultTextArea.setText("");
+    }
+    
+    private String numberFormat(String val) {
+        if (!val.isEmpty()) {
+            return new java.text.DecimalFormat("#,###").format(toInteger(val));
+        }
+        return "";
+    }
+    
+    private String getMultiplicandTextField() {
+        return MultiplicandTextField.getText();
+    }
+    
+    private String getMultiplierTextField() {
+        return MultiplierTextField.getText();
+    }
+    
+    private String getSubtractTextField() {
+        return SubtractTextField.getText();
+    }
+    
+    private void setMultiplicandTextField(String val) {
+        MultiplicandTextField.setText(val);
+    }
+    
+    private void setMultiplierTextField(String val) {
+        MultiplierTextField.setText(val);
+    }
+    
+    private void setSubstractTextField(String val) {
+        SubtractTextField.setText(val);
+    }
+    
+    private void setMultiResultTextArea(String multiplicand, String multiplier) {
+        MultiResultTextArea.append("Multiplication table of " + numberFormat(multiplicand) +  "  up to " + numberFormat(multiplier) + "\n");
+        MultiResultTextArea.append("Result : " + "\n");
+        for(int i = 1; i <= Integer.parseInt(multiplier); i++)  {
+            MultiResultTextArea.append(numberFormat(multiplicand) + " X "  + i + " = " + numberFormat(Integer.toString(toInteger(multiplicand) * i)) + "\n");
+        }
+        MultiResultTextArea.append("\n");
+    }
+    
+    private void setSuctractResultTextArea(String minuend, String subtract) {
+        SuctractResultTextArea.append("Display the number " + numberFormat(minuend) + " decreasing by " + numberFormat(subtract) + "\n");
+        SuctractResultTextArea.append("Result : " + "\n");
+        for(int j = toInteger(minuend); j >= 0; j -= toInteger(subtract))  {
+            SuctractResultTextArea.append(numberFormat(Integer.toString(j)) + " - "  + 
+                    numberFormat(Integer.toString(toInteger(subtract))) + " = " + 
+                    numberFormat(Integer.toString(j - toInteger(subtract)))  + "\n"
+            );
+        }
+        SuctractResultTextArea.append("\n");
+    }
+    
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void SubtractTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SubtractTextFieldKeyTyped
+        numberOnly(evt);
+    }//GEN-LAST:event_SubtractTextFieldKeyTyped
+
+    private void MultiplierTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MultiplierTextFieldKeyTyped
+        numberOnly(evt);
+    }//GEN-LAST:event_MultiplierTextFieldKeyTyped
+
+    private void MultiplicandTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MultiplicandTextFieldKeyTyped
+       numberOnly(evt);
+    }//GEN-LAST:event_MultiplicandTextFieldKeyTyped
+
+    private void ShowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowButtonActionPerformed
+        showResult(new javax.swing.JTextField[]{MultiplicandTextField, MultiplierTextField, SubtractTextField});
+    }//GEN-LAST:event_ShowButtonActionPerformed
+
+    private void MultiplicandTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MultiplicandTextFieldKeyReleased
+        setMultiplicandTextField(numberFormat(getMultiplicandTextField()));
+    }//GEN-LAST:event_MultiplicandTextFieldKeyReleased
+
+    private void MultiplierTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MultiplierTextFieldKeyReleased
+        setMultiplierTextField(numberFormat(getMultiplierTextField()));
+    }//GEN-LAST:event_MultiplierTextFieldKeyReleased
+
+    private void SubtractTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SubtractTextFieldKeyReleased
+        setSubstractTextField(numberFormat(getSubtractTextField()));
+    }//GEN-LAST:event_SubtractTextFieldKeyReleased
+
+    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
+        clearComponent();
+    }//GEN-LAST:event_ClearButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,9 +461,23 @@ public class Multiplication extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton ClearButton;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JPanel MainPartPanel;
+    private javax.swing.JLabel MultiResultLabel;
+    private javax.swing.JPanel MultiResultPartPanel;
+    private javax.swing.JScrollPane MultiResultScrollPane;
+    private javax.swing.JTextArea MultiResultTextArea;
+    private javax.swing.JLabel MultiplicandLabel;
+    private javax.swing.JTextField MultiplicandTextField;
+    private javax.swing.JLabel MultiplierLabel;
+    private javax.swing.JTextField MultiplierTextField;
+    private javax.swing.JButton ShowButton;
+    private javax.swing.JLabel SubtractLabel;
+    private javax.swing.JPanel SubtractPartPanel;
+    private javax.swing.JLabel SubtractResultLabel;
+    private javax.swing.JScrollPane SubtractResultScrollPane;
+    private javax.swing.JTextField SubtractTextField;
+    private javax.swing.JTextArea SuctractResultTextArea;
     // End of variables declaration//GEN-END:variables
 }
