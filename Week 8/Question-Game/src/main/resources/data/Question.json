@@ -1,0 +1,62 @@
+[
+  {
+    "question": "1. Which planet is known as the Red Planet?",
+    "choices": ["Earth", "Mars", "Jupiter", "Venus"],
+    "fiftyFifty": "Jupiter",
+    "answer": "Mars"
+  },
+  {
+    "question": "2. What is the capital city of Thailand?",
+    "choices": ["Chiang Mai", "Bangkok", "Phuket", "Ayutthaya"],
+    "fiftyFifty": "Ayutthaya",
+    "answer": "Bangkok"
+  },
+  {
+    "question": "3. Which animal is known as the King of the Jungle?",
+    "choices": ["Elephant", "Tiger", "Lion", "Giraffe"],
+    "fiftyFifty": "Tiger",
+    "answer": "Lion"
+  },
+  {
+    "question": "4. How many continents are there on Earth?",
+    "choices": ["5", "6", "7", "8"],
+    "fiftyFifty": "6",
+    "answer": "7"
+  },
+  {
+    "question": "5. What is H2O commonly known as?",
+    "choices": ["Fire", "Oil", "Water", "Salt"],
+    "fiftyFifty": "Oil",
+    "answer": "Water"
+  },
+  {
+    "question": "6. Which programming language is primarily used for Android apps?",
+    "choices": ["Python", "Java", "C++", "HTML"],
+    "fiftyFifty": "C++",
+    "answer": "Java"
+  },
+  {
+    "question": "7. What is the largest ocean in the world?",
+    "choices": ["Indian Ocean", "Pacific Ocean", "Atlantic Ocean", "Arctic Ocean"],
+    "fiftyFifty": "Atlantic Ocean",
+    "answer": "Pacific Ocean"
+  },
+  {
+    "question": "8. Which instrument has black and white keys?",
+    "choices": ["Guitar", "Violin", "Piano", "Flute"],
+    "fiftyFifty": "Violin",
+    "answer": "Piano"
+  },
+  {
+    "question": "9. Which country invented pizza?",
+    "choices": ["France", "Japan", "Italy", "USA"],
+    "fiftyFifty": "France",
+    "answer": "Italy"
+  },
+  {
+    "question": "10. Which is the fastest land animal?",
+    "choices": ["Horse", "Cheetah", "Wolf", "Leopard"],
+    "fiftyFifty": "Leopard",
+    "answer": "Cheetah"
+  }
+]
