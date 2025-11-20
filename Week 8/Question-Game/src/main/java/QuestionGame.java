@@ -486,7 +486,7 @@ public class QuestionGame extends javax.swing.JFrame {
                 gameLose = true;
                 setSymbolQuestionLabel(questionNumber, false);
                 setEnableRadioButton(false);
-                gameLose();
+                swapButton();
             }
         } 
         else {
@@ -496,12 +496,14 @@ public class QuestionGame extends javax.swing.JFrame {
     
     private void gameWin() {
         gameLose = true;
+        fiftyFiftyButton.setEnabled(false);
+        setEnableRadioButton(false);
         playSound(2, 500);
         callOptionPane("Congratulations, you won this game", "Congratulations", 1);
-        gameLose();
+        swapButton();
     }
     
-    private void gameLose() {
+    private void swapButton() {
         if(gameLose) {
             AnswerButton.setBackground(java.awt.Color.ORANGE);
             AnswerButton.setText("Retry");
@@ -545,7 +547,7 @@ public class QuestionGame extends javax.swing.JFrame {
             ChoiceButtonGroup.clearSelection();
             setPointLabel("0"); 
             setEnableRadioButton(true);
-            gameLose();
+            swapButton();
             setQuestionDetail(questionNumber);
         }
         return;
