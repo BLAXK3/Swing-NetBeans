@@ -202,43 +202,43 @@ public class QuestionGame extends javax.swing.JFrame {
         NumberQuestionsPartPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         NumberQuestionsPartPanel.setForeground(new java.awt.Color(255, 255, 0));
 
-        Question1Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question1Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question1Label.setForeground(new java.awt.Color(255, 255, 0));
         Question1Label.setText("1");
 
-        Question2Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question2Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question2Label.setForeground(new java.awt.Color(255, 255, 0));
         Question2Label.setText("2");
 
-        Question3Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question3Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question3Label.setForeground(new java.awt.Color(255, 255, 0));
         Question3Label.setText("3");
 
-        Question4Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question4Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question4Label.setForeground(new java.awt.Color(255, 255, 0));
         Question4Label.setText("4");
 
-        Question5Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question5Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question5Label.setForeground(new java.awt.Color(255, 255, 0));
         Question5Label.setText("5");
 
-        Question6Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question6Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question6Label.setForeground(new java.awt.Color(255, 255, 0));
         Question6Label.setText("6");
 
-        Question7Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question7Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question7Label.setForeground(new java.awt.Color(255, 255, 0));
         Question7Label.setText("7");
 
-        Question8Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question8Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question8Label.setForeground(new java.awt.Color(255, 255, 0));
         Question8Label.setText("8");
 
-        Question9Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question9Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question9Label.setForeground(new java.awt.Color(255, 255, 0));
         Question9Label.setText("9");
 
-        Question10Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Question10Label.setFont(new java.awt.Font("Segoe UI Symbol", 1, 18)); // NOI18N
         Question10Label.setForeground(new java.awt.Color(255, 255, 0));
         Question10Label.setText("10");
 
@@ -294,25 +294,26 @@ public class QuestionGame extends javax.swing.JFrame {
         MainPartPanelLayout.setHorizontalGroup(
             MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPartPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MainPartPanelLayout.createSequentialGroup()
-                        .addComponent(QuestionGameLabel)
-                        .addGap(145, 145, 145)
-                        .addComponent(ScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PointLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(QuestionPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
-            .addGroup(MainPartPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(AnswerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131))
             .addGroup(MainPartPanelLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(NumberQuestionsPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainPartPanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(MainPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MainPartPanelLayout.createSequentialGroup()
+                                .addComponent(QuestionGameLabel)
+                                .addGap(145, 145, 145)
+                                .addComponent(ScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PointLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(QuestionPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(MainPartPanelLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(NumberQuestionsPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         MainPartPanelLayout.setVerticalGroup(
