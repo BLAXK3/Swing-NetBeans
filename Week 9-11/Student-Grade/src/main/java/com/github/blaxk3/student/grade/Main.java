@@ -314,14 +314,6 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sNameTextFieldActionPerformed
-
-    private void stdIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdIDTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stdIDTextFieldActionPerformed
-
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         if(!getStudentID().isEmpty()) {
             new Database(this, 'a');
