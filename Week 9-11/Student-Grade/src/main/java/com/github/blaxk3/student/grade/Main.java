@@ -351,6 +351,18 @@ public class Main extends javax.swing.JFrame {
         new Database(this, 's');
     }//GEN-LAST:event_showDataButtonActionPerformed
 
+    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed                                                
+       scoreSpinner.setValue(0);
+       gradeASpinner.setValue(0);
+       gradeBPSpinner.setValue(0);
+       gradeBSpinner.setValue(0);
+       gradeCPSpinner.setValue(0);
+       gradeCSpinner.setValue(0);
+       gradeDPSpinner.setValue(0);
+       gradeDSpinner.setValue(0);
+       gradeFSpinner.setValue(0);
+    }//GEN-LAST:event_resetRateButtonActionPerformed     
+    
     /**
      * @param args the command line arguments
      */
