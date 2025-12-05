@@ -61,11 +61,6 @@ public class Main extends javax.swing.JFrame {
         stdIDTextField.setBackground(new java.awt.Color(255, 255, 255));
         stdIDTextField.setForeground(new java.awt.Color(0, 0, 0));
         stdIDTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Student ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        stdIDTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stdIDTextFieldActionPerformed(evt);
-            }
-        });
         stdIDTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 stdIDTextFieldKeyTyped(evt);
@@ -84,11 +79,6 @@ public class Main extends javax.swing.JFrame {
         sNameTextField.setBackground(new java.awt.Color(255, 255, 255));
         sNameTextField.setForeground(new java.awt.Color(0, 0, 0));
         sNameTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sure Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        sNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sNameTextFieldActionPerformed(evt);
-            }
-        });
         sNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 sNameTextFieldKeyTyped(evt);
@@ -334,7 +324,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void fNameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fNameTextFieldKeyTyped
-        if(getFirstName().length() == 50) {
+        if(getFirstName().length() == 20) {
             evt.consume();
         }
         characterOnly(evt);
@@ -348,7 +338,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_stdIDTextFieldKeyTyped
 
     private void sNameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sNameTextFieldKeyTyped
-         if(getSurname().length() == 50) {
+         if(getSurname().length() == 20) {
             evt.consume();
         }
         characterOnly(evt);
@@ -358,11 +348,8 @@ public class Main extends javax.swing.JFrame {
         new Database(this, 's');
     }//GEN-LAST:event_showDataButtonActionPerformed
 
-<<<<<<< HEAD
-    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed
-=======
-    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed                                                
->>>>>>> 0e42421a649184b1b7c1f38cfe1895d0ff7d4151
+
+    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                                                
        scoreSpinner.setValue(0);
        gradeASpinner.setValue(0);
        gradeBPSpinner.setValue(0);
@@ -372,13 +359,11 @@ public class Main extends javax.swing.JFrame {
        gradeDPSpinner.setValue(0);
        gradeDSpinner.setValue(0);
        gradeFSpinner.setValue(0);
-<<<<<<< HEAD
-    }//GEN-LAST:event_resetRateButtonActionPerformed
 
-=======
-    }//GEN-LAST:event_resetRateButtonActionPerformed     
+    }                                               
+
+                                                 
     
->>>>>>> 0e42421a649184b1b7c1f38cfe1895d0ff7d4151
     /**
      * @param args the command line arguments
      */
@@ -495,6 +480,7 @@ public class Main extends javax.swing.JFrame {
     
     private void characterOnly(java.awt.event.KeyEvent evt) {
         char val = evt.getKeyChar();
+        
         if (String.valueOf(val).matches("[^a-zA-Z]")) {
             evt.consume();
         }

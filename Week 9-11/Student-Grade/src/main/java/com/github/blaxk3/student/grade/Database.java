@@ -39,8 +39,8 @@ public class Database {
                         "CREATE TABLE student_grade ("
                         + "std_number INT IDENTITY(1,1) PRIMARY KEY, "
                         + "std_id VARCHAR(20) NOT NULL, "
-                        + "first_name VARCHAR(50), "
-                        + "surname VARCHAR(50), "
+                        + "first_name VARCHAR(20), "
+                        + "surname VARCHAR(20), "
                         + "grade VARCHAR(2)"
                         + ");";
 
