@@ -321,14 +321,6 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sNameTextFieldActionPerformed
-
-    private void stdIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdIDTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stdIDTextFieldActionPerformed
-
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         if(!getStudentID().isEmpty()) {
             new Database(this, 'a');
@@ -366,7 +358,11 @@ public class Main extends javax.swing.JFrame {
         new Database(this, 's');
     }//GEN-LAST:event_showDataButtonActionPerformed
 
+<<<<<<< HEAD
     private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed
+=======
+    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed                                                
+>>>>>>> 0e42421a649184b1b7c1f38cfe1895d0ff7d4151
        scoreSpinner.setValue(0);
        gradeASpinner.setValue(0);
        gradeBPSpinner.setValue(0);
@@ -376,8 +372,13 @@ public class Main extends javax.swing.JFrame {
        gradeDPSpinner.setValue(0);
        gradeDSpinner.setValue(0);
        gradeFSpinner.setValue(0);
+<<<<<<< HEAD
     }//GEN-LAST:event_resetRateButtonActionPerformed
 
+=======
+    }//GEN-LAST:event_resetRateButtonActionPerformed     
+    
+>>>>>>> 0e42421a649184b1b7c1f38cfe1895d0ff7d4151
     /**
      * @param args the command line arguments
      */

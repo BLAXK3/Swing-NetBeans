@@ -59,7 +59,6 @@ public class Database {
     }
     
     public void addStudentGrade(String[] data) {
-
             String sql = 
                 "MERGE student_grade AS target " +
                 "USING (SELECT ? AS std_id, ? AS first_name, ? AS surname, ? AS grade) AS src " +
