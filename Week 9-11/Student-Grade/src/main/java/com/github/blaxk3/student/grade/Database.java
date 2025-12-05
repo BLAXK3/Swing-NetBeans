@@ -25,7 +25,7 @@ public class Database {
     }
 
     public Connection connectDatabase() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Your database name;encrypt=true or false";
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=Your-database-name;encrypt=true or false";
         String user = "";
         String password = "";
 
@@ -53,6 +53,7 @@ public class Database {
             
         } catch (SQLException e) {
             main.callOptionPane(e.toString(), "Error", 0);
+            System.exit(0);
             return null;
         }
     }
@@ -80,6 +81,7 @@ public class Database {
             }
             catch (SQLException e) {
                 main.callOptionPane(e.toString(), "Error", 0);
+                System.exit(0);
             }
     }
 
@@ -89,7 +91,7 @@ public class Database {
         try (Connection conn = connectDatabase();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
-            ShowDataDialog dialog = new ShowDataDialog(main, true);
+            ShowDataDialog dialog = new ShowDataDialog();
             javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) dialog.getDataTable().getModel();
             model.setRowCount(0);
             while (rs.next()) {
@@ -104,6 +106,7 @@ public class Database {
             dialog.setVisible(true);
         } catch (SQLException e) {
             main.callOptionPane(e.toString(), "Error", 0);
+            System.exit(0);
         }
     }
 }

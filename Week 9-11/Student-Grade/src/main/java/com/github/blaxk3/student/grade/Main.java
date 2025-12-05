@@ -11,6 +11,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -141,6 +143,11 @@ public class Main extends javax.swing.JFrame {
         resetRateButton.setForeground(new java.awt.Color(0, 0, 0));
         resetRateButton.setText("Reset");
         resetRateButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        resetRateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetRateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout retePartPanelLayout = new javax.swing.GroupLayout(retePartPanel);
         retePartPanel.setLayout(retePartPanelLayout);
@@ -358,6 +365,18 @@ public class Main extends javax.swing.JFrame {
     private void showDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDataButtonActionPerformed
         new Database(this, 's');
     }//GEN-LAST:event_showDataButtonActionPerformed
+
+    private void resetRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRateButtonActionPerformed
+       scoreSpinner.setValue(0);
+       gradeASpinner.setValue(0);
+       gradeBPSpinner.setValue(0);
+       gradeBSpinner.setValue(0);
+       gradeCPSpinner.setValue(0);
+       gradeCSpinner.setValue(0);
+       gradeDPSpinner.setValue(0);
+       gradeDSpinner.setValue(0);
+       gradeFSpinner.setValue(0);
+    }//GEN-LAST:event_resetRateButtonActionPerformed
 
     /**
      * @param args the command line arguments
