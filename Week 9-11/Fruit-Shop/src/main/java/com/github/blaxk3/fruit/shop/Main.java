@@ -1,23 +1,25 @@
 package com.github.blaxk3.fruit.shop;
-
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
  * @author BLAXK
  */
 public class Main extends javax.swing.JFrame {
-
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-        copyComponents();
+        copyComponents("");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,20 +44,20 @@ public class Main extends javax.swing.JFrame {
         receiptPartPanel = new javax.swing.JPanel();
         receiptLabel = new javax.swing.JLabel();
         orderDetailScrollPane = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        orderDetailTextArea = new javax.swing.JTextArea();
         addButton = new javax.swing.JButton();
+        showButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         categoiresMenu = new javax.swing.JMenu();
         allFruitMenuItem = new javax.swing.JMenuItem();
-        simpleFruitCBMI = new javax.swing.JCheckBoxMenuItem();
-        aggregateFruitCBMI = new javax.swing.JCheckBoxMenuItem();
-        multipleFruitCBMI = new javax.swing.JCheckBoxMenuItem();
+        simpleFruitMenuItem = new javax.swing.JMenuItem();
+        aggregateFruitMenuItem = new javax.swing.JMenuItem();
+        multipleFruitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fruit Shop");
         setName("mainFrame"); // NOI18N
-        setResizable(false);
 
         productPartPanel.setBackground(new java.awt.Color(255, 255, 255));
         productPartPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -67,7 +69,7 @@ public class Main extends javax.swing.JFrame {
         shopLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         productListPartPanel.setBackground(new java.awt.Color(255, 255, 255));
-        productListPartPanel.setPreferredSize(new java.awt.Dimension(223, 250));
+        productListPartPanel.setPreferredSize(new java.awt.Dimension(250, 250));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 20);
         flowLayout1.setAlignOnBaseline(true);
         productListPartPanel.setLayout(flowLayout1);
@@ -110,6 +112,11 @@ public class Main extends javax.swing.JFrame {
         productQtySpinner.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         productQtySpinner.setModel(new javax.swing.SpinnerNumberModel());
         productQtySpinner.setPreferredSize(new java.awt.Dimension(83, 30));
+        productQtySpinner.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productQtySpinnerKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout productPanelPrototypeLayout = new javax.swing.GroupLayout(productPanelPrototype);
         productPanelPrototype.setLayout(productPanelPrototypeLayout);
@@ -179,23 +186,34 @@ public class Main extends javax.swing.JFrame {
         receiptLabel.setText("Receipt");
         receiptLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextArea1.setFocusable(false);
-        orderDetailScrollPane.setViewportView(jTextArea1);
+        orderDetailTextArea.setEditable(false);
+        orderDetailTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        orderDetailTextArea.setColumns(20);
+        orderDetailTextArea.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        orderDetailTextArea.setForeground(new java.awt.Color(0, 0, 0));
+        orderDetailTextArea.setLineWrap(true);
+        orderDetailTextArea.setRows(5);
+        orderDetailTextArea.setWrapStyleWord(true);
+        orderDetailTextArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        orderDetailTextArea.setFocusable(false);
+        orderDetailScrollPane.setViewportView(orderDetailTextArea);
 
         addButton.setBackground(new java.awt.Color(102, 255, 51));
         addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addButton.setForeground(new java.awt.Color(0, 0, 0));
         addButton.setText("Add");
         addButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        showButton.setBackground(new java.awt.Color(255, 204, 0));
+        showButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        showButton.setForeground(new java.awt.Color(0, 0, 0));
+        showButton.setText("Show");
+        showButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        showButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showButtonActionPerformed(evt);
+            }
+        });
 
         exitButton.setBackground(new java.awt.Color(255, 0, 0));
         exitButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -216,14 +234,18 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 16, Short.MAX_VALUE)
                 .addComponent(receiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receiptPartPanelLayout.createSequentialGroup()
+            .addGroup(receiptPartPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(receiptPartPanelLayout.createSequentialGroup()
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(receiptPartPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         receiptPartPanelLayout.setVerticalGroup(
@@ -231,13 +253,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(receiptPartPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(receiptLabel)
-                .addGap(29, 29, 29)
-                .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -247,16 +271,36 @@ public class Main extends javax.swing.JFrame {
         categoiresMenu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         allFruitMenuItem.setText("All");
+        allFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allFruitMenuItemActionPerformed(evt);
+            }
+        });
         categoiresMenu.add(allFruitMenuItem);
 
-        simpleFruitCBMI.setText("Simple fruit");
-        categoiresMenu.add(simpleFruitCBMI);
+        simpleFruitMenuItem.setText("Simple fruit");
+        simpleFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpleFruitMenuItemActionPerformed(evt);
+            }
+        });
+        categoiresMenu.add(simpleFruitMenuItem);
 
-        aggregateFruitCBMI.setText("Aggregate fruit");
-        categoiresMenu.add(aggregateFruitCBMI);
+        aggregateFruitMenuItem.setText("Aggregate fruit");
+        aggregateFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aggregateFruitMenuItemActionPerformed(evt);
+            }
+        });
+        categoiresMenu.add(aggregateFruitMenuItem);
 
-        multipleFruitCBMI.setText("Multiple fruit");
-        categoiresMenu.add(multipleFruitCBMI);
+        multipleFruitMenuItem.setText("Multiple fruit");
+        multipleFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multipleFruitMenuItemActionPerformed(evt);
+            }
+        });
+        categoiresMenu.add(multipleFruitMenuItem);
 
         menuBar.add(categoiresMenu);
 
@@ -283,6 +327,34 @@ public class Main extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void aggregateFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggregateFruitMenuItemActionPerformed
+        clearData(); 
+        copyComponents("aggregate-fruit");
+    }//GEN-LAST:event_aggregateFruitMenuItemActionPerformed
+
+    private void allFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allFruitMenuItemActionPerformed
+        clearData(); 
+        copyComponents("All");
+    }//GEN-LAST:event_allFruitMenuItemActionPerformed
+
+    private void simpleFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpleFruitMenuItemActionPerformed
+        clearData(); 
+        copyComponents("simple-fruit");
+    }//GEN-LAST:event_simpleFruitMenuItemActionPerformed
+
+    private void multipleFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multipleFruitMenuItemActionPerformed
+        clearData(); 
+        copyComponents("multiple-fruit");
+    }//GEN-LAST:event_multipleFruitMenuItemActionPerformed
+
+    private void productQtySpinnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productQtySpinnerKeyTyped
+        numberOnly(evt);
+    }//GEN-LAST:event_productQtySpinnerKeyTyped
+
+    private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
+       
+    }//GEN-LAST:event_showButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,14 +393,14 @@ public class Main extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JCheckBoxMenuItem aggregateFruitCBMI;
+    private javax.swing.JMenuItem aggregateFruitMenuItem;
     private javax.swing.JMenuItem allFruitMenuItem;
     private javax.swing.JMenu categoiresMenu;
     private javax.swing.JButton exitButton;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JCheckBoxMenuItem multipleFruitCBMI;
+    private javax.swing.JMenuItem multipleFruitMenuItem;
     private javax.swing.JScrollPane orderDetailScrollPane;
+    private javax.swing.JTextArea orderDetailTextArea;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JLabel productImageLabel;
     private javax.swing.JPanel productListPartPanel;
@@ -342,11 +414,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel receiptLabel;
     private javax.swing.JPanel receiptPartPanel;
     private javax.swing.JLabel shopLabel;
-    private javax.swing.JCheckBoxMenuItem simpleFruitCBMI;
+    private javax.swing.JButton showButton;
+    private javax.swing.JMenuItem simpleFruitMenuItem;
     // End of variables declaration//GEN-END:variables
-    private java.util.Map<String, java.net.URL> test = new java.util.HashMap<>(); 
-    private java.util.List<String> productName = new java.util.ArrayList<>();
-    private java.util.List<java.net.URL> productImge = new java.util.ArrayList<>();
     private javax.swing.JPanel[] productPanels;
     private javax.swing.JLabel[] copyProductNameLabel;
     private javax.swing.JLabel[] copyProductImageLabel;
@@ -354,19 +424,26 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel[] copyProductPriceLabel ;
     private javax.swing.JLabel[] copyQtyLabel;
     private javax.swing.JSpinner[] copyProductQtySpinner;
-    
-//    record Info(URL url, JLabel label, JSpinner spinner) {}
+    private Map<String, Map<String, Integer>> productData = new TreeMap();
+    private List<URL> productImage = new ArrayList();
+    private boolean initData = true;
     
     public void callOptionPane(String message, String title, int type) {
         javax.swing.JOptionPane.showMessageDialog(this,  message, title, type);
-       
     }
     
-    private void copyComponents() {
+    private void copyComponents(String categories) {
         try {
-            int size = countImage(new File(getClass().getResource("/images").toURI()));
+            int size;
             int index = 0;
-            resizePanel(size );
+            if(categories.contains("fruit")) {
+                size = countImage(new File(getClass().getResource("/images/" + categories).toURI()));
+            }
+            else {
+                categories = "All";
+                size = countImage(new File(getClass().getResource("/images").toURI()));
+            }
+            resizePanel(size);
             productPanels = new javax.swing.JPanel[size];
             copyProductNameLabel = new javax.swing.JLabel[size];
             copyProductImageLabel = new javax.swing.JLabel[size];
@@ -375,65 +452,108 @@ public class Main extends javax.swing.JFrame {
             copyQtyLabel = new javax.swing.JLabel[size];
             copyProductQtySpinner = new javax.swing.JSpinner[size];
             
-            for(javax.swing.JPanel copyProductPanels : productPanels) {
+            productImage.sort(Comparator.comparing(url -> 
+                    url.getPath().substring(url.getPath().lastIndexOf('/') + 1).toLowerCase()
+            ));
+            
+            if (!productData.containsKey("All")) {
+                Map<String, Integer> all = new TreeMap<>();
+
+                for (Map<String, Integer> innerMap : productData.values()) {
+                    all.putAll(innerMap);
+                }
+                productData.put("All", all);
+            }
+            List<String> productName = new ArrayList<>(productData.get(categories).keySet());
+            
+            for (javax.swing.JPanel copyProductPanels : productPanels) {
                 copyProductPanels = new javax.swing.JPanel();
                 copyProductPanels.setBackground(productPanelPrototype.getBackground());
                 copyProductPanels.setBorder(productPanelPrototype.getBorder());
                 copyProductPanels.setPreferredSize(productPanelPrototype.getPreferredSize());
-                
-                copyProductNameLabel[index] = new  javax.swing.JLabel();
-                copyProductNameLabel[index].setHorizontalAlignment(productNameLabel.getHorizontalAlignment());
-                copyProductNameLabel[index].setText(productName.get(index));
-                copyProductNameLabel[index].setFont(productNameLabel.getFont());
+
+                copyProductNameLabel[index] = new javax.swing.JLabel();
                 copyProductNameLabel[index].setPreferredSize(productNameLabel.getPreferredSize());
+                copyProductNameLabel[index].setHorizontalAlignment(productNameLabel.getHorizontalAlignment());
+                copyProductNameLabel[index].setFont(productNameLabel.getFont());
+                copyProductNameLabel[index].setText(productName.get(index));
                 copyProductPanels.add(copyProductNameLabel[index]);
 
                 copyProductImageLabel[index] = new javax.swing.JLabel();
-                copyProductImageLabel[index].setIcon(new javax.swing.ImageIcon(productImge.get(index)));
+                copyProductImageLabel[index].setIcon(new javax.swing.ImageIcon(productImage.get(index)));
                 copyProductImageLabel[index].setPreferredSize(productImageLabel.getPreferredSize());
                 copyProductPanels.add(copyProductImageLabel[index]);
-                
+
                 copyPriceLabel[index] = new javax.swing.JLabel();
                 copyPriceLabel[index].setFont(priceLabel.getFont());
                 copyPriceLabel[index].setText(priceLabel.getText());
                 copyPriceLabel[index].setPreferredSize(priceLabel.getPreferredSize());
                 copyProductPanels.add(copyPriceLabel[index]);
-                
+
                 copyProductPriceLabel[index] = new javax.swing.JLabel();
+                copyProductPriceLabel[index].setPreferredSize(productPriceLabel.getPreferredSize());
                 copyProductPriceLabel[index].setHorizontalAlignment(productPriceLabel.getHorizontalAlignment());
                 copyProductPriceLabel[index].setFont(productPriceLabel.getFont());
-                copyProductPriceLabel[index].setText(productPriceLabel.getText());
-                copyProductPriceLabel[index].setPreferredSize(productPriceLabel.getPreferredSize());
+                copyProductPriceLabel[index].setText(productData.get(categories).get(productName.get(index)) + " ฿");
                 copyProductPanels.add(copyProductPriceLabel[index]);
-                
+
                 copyQtyLabel[index] = new javax.swing.JLabel();
                 copyQtyLabel[index].setFont(qtyLabel.getFont());
                 copyQtyLabel[index].setText(qtyLabel.getText());
                 copyQtyLabel[index].setPreferredSize(qtyLabel.getPreferredSize());
                 copyProductPanels.add(copyQtyLabel[index]);
-                
+
                 copyProductQtySpinner[index] = new javax.swing.JSpinner();
                 copyProductQtySpinner[index].setFont(productQtySpinner.getFont());
                 copyProductQtySpinner[index].setPreferredSize(productQtySpinner.getPreferredSize());
                 copyProductPanels.add(copyProductQtySpinner[index]);
-                
                 productListPartPanel.add(copyProductPanels);
+               
                 index++;
             }
+            initData = false;
         } catch (URISyntaxException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            callOptionPane("Error", ex.toString(), 0);
+            System.exit(0);
         }
+    }
+
+    public javax.swing.JLabel findLabelInPanel(javax.swing.JPanel panel, String text) {
+        for (java.awt.Component comp : panel.getComponents()) {
+            
+            System.out.println(comp);
+            if (comp instanceof javax.swing.JLabel label) {
+                if (text.equals(label.getText())) {
+                    return label; 
+                }
+            }
+
+            if (comp instanceof javax.swing.JPanel subPanel) {
+                javax.swing.JLabel result = findLabelInPanel(subPanel, text);
+                if (result != null) return result;
+            }
+        }
+        return null;
+    }
+
+    
+    private int randomPrice() {
+        return new java.util.Random().nextInt(151) + 50;
     }
    
     private void resizePanel(int imgQty) {
-        int col = 3; // Default value
-        int width = ((productPanelPrototype.getPreferredSize().width + 25) * col);
-        int height = ((productPanelPrototype.getPreferredSize().height + 25) * (imgQty / col));
+        int col = 3; // defualt value
+        int panelW = productPanelPrototype.getPreferredSize().width;
+        int panelH = productPanelPrototype.getPreferredSize().height;
+        int paddingX = 25;
+        int paddingY = 25;
+        int rows = (int) Math.ceil((double) imgQty / col);
+        int width  = (panelW + paddingX) * col;
+        int height = (panelH + paddingY) * rows;
         productListPartPanel.setPreferredSize(new java.awt.Dimension(width, height));
     }
     
     private int countImage(File folder) {
-//        productName.clear();
         int count = 0;
         File[] files = folder.listFiles();
         if (files == null) return 0;
@@ -443,10 +563,15 @@ public class Main extends javax.swing.JFrame {
                 count += countImage(file);
             } 
             else {
-                String fileName = file.getName();
-                if (fileName.toLowerCase().endsWith(".jpg")) {
-                    productName.add(fileName.substring(0, fileName.lastIndexOf('.')));
-                    productImge.add(getClass().getResource("/images/" + file.getParentFile().getName() + "/" + fileName));
+                String extension = file.getName();
+                if (extension.toLowerCase().endsWith(".jpg")) {
+                    String parent = file.getParentFile().getName();
+                    productImage.add(getClass().getResource("/images/" + parent + "/" + extension));
+                    if (initData) {
+                        String fileName = extension.substring(0, extension.lastIndexOf('.'));
+                        productData.putIfAbsent(parent, new TreeMap<>());
+                        productData.get(parent).put(fileName, randomPrice());
+                    }
                     count++;
                 }
             }
@@ -454,4 +579,18 @@ public class Main extends javax.swing.JFrame {
         return count;
     }
     
+    private void clearData() {
+        productListPartPanel.removeAll();
+        productListPartPanel.revalidate();
+        productListPartPanel.repaint();
+        productImage.clear();
+    }
+    
+    private void numberOnly(java.awt.event.KeyEvent evt) {
+        char val = evt.getKeyChar();
+        
+        if (!Character.isDigit(val)) {
+            evt.consume();
+        }
+    }
 }
