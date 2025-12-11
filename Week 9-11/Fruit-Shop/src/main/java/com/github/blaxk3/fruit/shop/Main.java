@@ -1,18 +1,26 @@
 package com.github.blaxk3.fruit.shop;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
  * @author BLAXK
  */
 public class Main extends javax.swing.JFrame {
+
     /**
      * Creates new form Main
      */
@@ -21,6 +29,7 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         copyComponents("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +54,11 @@ public class Main extends javax.swing.JFrame {
         receiptLabel = new javax.swing.JLabel();
         orderDetailScrollPane = new javax.swing.JScrollPane();
         orderDetailTextArea = new javax.swing.JTextArea();
-        addButton = new javax.swing.JButton();
+        buttonPartPanel = new javax.swing.JPanel();
+        totalButton = new javax.swing.JButton();
+        addDataButton = new javax.swing.JButton();
         showButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         categoiresMenu = new javax.swing.JMenu();
@@ -112,11 +124,6 @@ public class Main extends javax.swing.JFrame {
         productQtySpinner.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         productQtySpinner.setModel(new javax.swing.SpinnerNumberModel());
         productQtySpinner.setPreferredSize(new java.awt.Dimension(83, 30));
-        productQtySpinner.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                productQtySpinnerKeyTyped(evt);
-            }
-        });
 
         javax.swing.GroupLayout productPanelPrototypeLayout = new javax.swing.GroupLayout(productPanelPrototype);
         productPanelPrototype.setLayout(productPanelPrototypeLayout);
@@ -189,7 +196,7 @@ public class Main extends javax.swing.JFrame {
         orderDetailTextArea.setEditable(false);
         orderDetailTextArea.setBackground(new java.awt.Color(255, 255, 255));
         orderDetailTextArea.setColumns(20);
-        orderDetailTextArea.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        orderDetailTextArea.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         orderDetailTextArea.setForeground(new java.awt.Color(0, 0, 0));
         orderDetailTextArea.setLineWrap(true);
         orderDetailTextArea.setRows(5);
@@ -198,20 +205,52 @@ public class Main extends javax.swing.JFrame {
         orderDetailTextArea.setFocusable(false);
         orderDetailScrollPane.setViewportView(orderDetailTextArea);
 
-        addButton.setBackground(new java.awt.Color(102, 255, 51));
-        addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(0, 0, 0));
-        addButton.setText("Add");
-        addButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buttonPartPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        totalButton.setBackground(new java.awt.Color(102, 255, 51));
+        totalButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        totalButton.setForeground(new java.awt.Color(0, 0, 0));
+        totalButton.setText("Total");
+        totalButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        totalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalButtonActionPerformed(evt);
+            }
+        });
+
+        addDataButton.setBackground(new java.awt.Color(102, 255, 255));
+        addDataButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addDataButton.setForeground(new java.awt.Color(0, 0, 0));
+        addDataButton.setText("Add Data");
+        addDataButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        addDataButton.setEnabled(false);
+        addDataButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDataButtonActionPerformed(evt);
+            }
+        });
 
         showButton.setBackground(new java.awt.Color(255, 204, 0));
         showButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         showButton.setForeground(new java.awt.Color(0, 0, 0));
-        showButton.setText("Show");
+        showButton.setText("Show Table");
         showButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        showButton.setEnabled(false);
         showButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setBackground(new java.awt.Color(204, 51, 255));
+        clearButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        clearButton.setForeground(new java.awt.Color(0, 0, 0));
+        clearButton.setText("Clear");
+        clearButton.setActionCommand("Clear");
+        clearButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
             }
         });
 
@@ -226,42 +265,67 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout buttonPartPanelLayout = new javax.swing.GroupLayout(buttonPartPanel);
+        buttonPartPanel.setLayout(buttonPartPanelLayout);
+        buttonPartPanelLayout.setHorizontalGroup(
+            buttonPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPartPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(buttonPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, buttonPartPanelLayout.createSequentialGroup()
+                        .addComponent(totalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(addDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(buttonPartPanelLayout.createSequentialGroup()
+                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonPartPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        buttonPartPanelLayout.setVerticalGroup(
+            buttonPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPartPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(buttonPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(buttonPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout receiptPartPanelLayout = new javax.swing.GroupLayout(receiptPartPanel);
         receiptPartPanel.setLayout(receiptPartPanelLayout);
         receiptPartPanelLayout.setHorizontalGroup(
             receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receiptPartPanelLayout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
-                .addComponent(receiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(receiptPartPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(0, 42, Short.MAX_VALUE)
+                .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(receiptLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                     .addGroup(receiptPartPanelLayout.createSequentialGroup()
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(receiptPartPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(11, 11, 11)
+                        .addComponent(buttonPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         receiptPartPanelLayout.setVerticalGroup(
             receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receiptPartPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(receiptLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(orderDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(receiptPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -270,6 +334,7 @@ public class Main extends javax.swing.JFrame {
         categoiresMenu.setText("Categories");
         categoiresMenu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
+        allFruitMenuItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         allFruitMenuItem.setText("All");
         allFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +343,7 @@ public class Main extends javax.swing.JFrame {
         });
         categoiresMenu.add(allFruitMenuItem);
 
+        simpleFruitMenuItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         simpleFruitMenuItem.setText("Simple fruit");
         simpleFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +352,7 @@ public class Main extends javax.swing.JFrame {
         });
         categoiresMenu.add(simpleFruitMenuItem);
 
+        aggregateFruitMenuItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         aggregateFruitMenuItem.setText("Aggregate fruit");
         aggregateFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,6 +361,7 @@ public class Main extends javax.swing.JFrame {
         });
         categoiresMenu.add(aggregateFruitMenuItem);
 
+        multipleFruitMenuItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         multipleFruitMenuItem.setText("Multiple fruit");
         multipleFruitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,32 +397,48 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void aggregateFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggregateFruitMenuItemActionPerformed
-        clearData(); 
+        clearData();
         copyComponents("aggregate-fruit");
     }//GEN-LAST:event_aggregateFruitMenuItemActionPerformed
 
     private void allFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allFruitMenuItemActionPerformed
-        clearData(); 
-        copyComponents("All");
+        clearData();
+        copyComponents("");
     }//GEN-LAST:event_allFruitMenuItemActionPerformed
 
     private void simpleFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpleFruitMenuItemActionPerformed
-        clearData(); 
+        clearData();
         copyComponents("simple-fruit");
     }//GEN-LAST:event_simpleFruitMenuItemActionPerformed
 
     private void multipleFruitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multipleFruitMenuItemActionPerformed
-        clearData(); 
+        clearData();
         copyComponents("multiple-fruit");
     }//GEN-LAST:event_multipleFruitMenuItemActionPerformed
 
-    private void productQtySpinnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productQtySpinnerKeyTyped
-        numberOnly(evt);
-    }//GEN-LAST:event_productQtySpinnerKeyTyped
-
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
-       
+        new Database(this, 's');
     }//GEN-LAST:event_showButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        clearComponent();
+        addDataButton.setEnabled(false);
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void totalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalButtonActionPerformed
+        showReceipt();
+    }//GEN-LAST:event_totalButtonActionPerformed
+
+    private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
+        if (orderDetailTextArea.getText().isEmpty()) {
+            callOptionPane("Please update the total!", "Alert", 2);
+            return;
+        }
+        addDataButton.setEnabled(false);
+        new Database(this, 'a');
+        showButton.setEnabled(true);
+        clearComponent();
+    }//GEN-LAST:event_addDataButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,12 +474,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton addDataButton;
     private javax.swing.JMenuItem aggregateFruitMenuItem;
     private javax.swing.JMenuItem allFruitMenuItem;
+    private javax.swing.JPanel buttonPartPanel;
     private javax.swing.JMenu categoiresMenu;
+    private javax.swing.JButton clearButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem multipleFruitMenuItem;
@@ -416,34 +502,61 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel shopLabel;
     private javax.swing.JButton showButton;
     private javax.swing.JMenuItem simpleFruitMenuItem;
+    private javax.swing.JButton totalButton;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JPanel[] productPanels;
     private javax.swing.JLabel[] copyProductNameLabel;
     private javax.swing.JLabel[] copyProductImageLabel;
     private javax.swing.JLabel[] copyPriceLabel;
-    private javax.swing.JLabel[] copyProductPriceLabel ;
+    private javax.swing.JLabel[] copyProductPriceLabel;
     private javax.swing.JLabel[] copyQtyLabel;
     private javax.swing.JSpinner[] copyProductQtySpinner;
     private Map<String, Map<String, Integer>> productData = new TreeMap();
+    private Map<String, Integer> receiptData = new TreeMap<>();
     private List<URL> productImage = new ArrayList();
     private boolean initData = true;
-    
+    private String refNumGen;
+    private AtomicInteger total;
+
+    /**
+     * Shows a standard message dialog.
+     *
+     * @param message the text message to display
+     * @param title the dialog window title
+     * @param type the type of message (JOptionPane message type)
+     */
     public void callOptionPane(String message, String title, int type) {
-        javax.swing.JOptionPane.showMessageDialog(this,  message, title, type);
+        javax.swing.JOptionPane.showMessageDialog(this, message, title, type);
     }
-    
+
+    /**
+     * Shows a YES/NO confirmation dialog and returns the user's choice.
+     *
+     * @param message the confirmation message to display
+     * @param title the dialog window title
+     * @return YES_OPTION or NO_OPTION depending on user selection
+     */
+    public int callOptionPaneConfirmDialog(String message, String title) {
+        return javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                message,
+                title,
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+    }
+
+    /**
+     * Dynamically copies product components (image, name, price, spinner) into
+     * the product list panel based on selected category.
+     *
+     * @param categories the category folder name inside /images/
+     */
     private void copyComponents(String categories) {
         try {
-            int size;
-            int index = 0;
-            if(categories.contains("fruit")) {
-                size = countImage(new File(getClass().getResource("/images/" + categories).toURI()));
-            }
-            else {
-                categories = "All";
-                size = countImage(new File(getClass().getResource("/images").toURI()));
-            }
+            int size = countImage(new File(getClass().getResource("/images/" + categories).toURI()));
+            categories = categories.isEmpty() ? "All" : categories;
             resizePanel(size);
+
             productPanels = new javax.swing.JPanel[size];
             copyProductNameLabel = new javax.swing.JLabel[size];
             copyProductImageLabel = new javax.swing.JLabel[size];
@@ -451,96 +564,118 @@ public class Main extends javax.swing.JFrame {
             copyProductPriceLabel = new javax.swing.JLabel[size];
             copyQtyLabel = new javax.swing.JLabel[size];
             copyProductQtySpinner = new javax.swing.JSpinner[size];
-            
-            productImage.sort(Comparator.comparing(url -> 
-                    url.getPath().substring(url.getPath().lastIndexOf('/') + 1).toLowerCase()
+
+            productImage.sort(Comparator.comparing(url
+                    -> url.getPath().substring(url.getPath().lastIndexOf('/') + 1).toLowerCase()
             ));
-            
+
             if (!productData.containsKey("All")) {
-                Map<String, Integer> all = new TreeMap<>();
+                Map<String, Integer> newMap = new TreeMap<>();
 
                 for (Map<String, Integer> innerMap : productData.values()) {
-                    all.putAll(innerMap);
+                    newMap.putAll(innerMap);
                 }
-                productData.put("All", all);
+                productData.put("All", newMap);
             }
-            List<String> productName = new ArrayList<>(productData.get(categories).keySet());
-            
-            for (javax.swing.JPanel copyProductPanels : productPanels) {
-                copyProductPanels = new javax.swing.JPanel();
-                copyProductPanels.setBackground(productPanelPrototype.getBackground());
-                copyProductPanels.setBorder(productPanelPrototype.getBorder());
-                copyProductPanels.setPreferredSize(productPanelPrototype.getPreferredSize());
+            var productName = new ArrayList<>(productData.get(categories).keySet());
+
+            for (int index = 0; index < productPanels.length; index++) {
+                productPanels[index] = new javax.swing.JPanel();
+                javax.swing.JPanel newProductPanel = productPanels[index];
+                newProductPanel.setBackground(productPanelPrototype.getBackground());
+                newProductPanel.setBorder(productPanelPrototype.getBorder());
+                newProductPanel.setPreferredSize(productPanelPrototype.getPreferredSize());
 
                 copyProductNameLabel[index] = new javax.swing.JLabel();
-                copyProductNameLabel[index].setPreferredSize(productNameLabel.getPreferredSize());
-                copyProductNameLabel[index].setHorizontalAlignment(productNameLabel.getHorizontalAlignment());
-                copyProductNameLabel[index].setFont(productNameLabel.getFont());
-                copyProductNameLabel[index].setText(productName.get(index));
-                copyProductPanels.add(copyProductNameLabel[index]);
+                javax.swing.JLabel newProductNameLabel = copyProductNameLabel[index];
+                newProductNameLabel.setPreferredSize(productNameLabel.getPreferredSize());
+                newProductNameLabel.setHorizontalAlignment(productNameLabel.getHorizontalAlignment());
+                newProductNameLabel.setFont(productNameLabel.getFont());
+                newProductNameLabel.setText(productName.get(index));
+                newProductPanel.add(newProductNameLabel);
 
                 copyProductImageLabel[index] = new javax.swing.JLabel();
                 copyProductImageLabel[index].setIcon(new javax.swing.ImageIcon(productImage.get(index)));
                 copyProductImageLabel[index].setPreferredSize(productImageLabel.getPreferredSize());
-                copyProductPanels.add(copyProductImageLabel[index]);
+                newProductPanel.add(copyProductImageLabel[index]);
 
                 copyPriceLabel[index] = new javax.swing.JLabel();
+                copyPriceLabel[index].setPreferredSize(priceLabel.getPreferredSize());
                 copyPriceLabel[index].setFont(priceLabel.getFont());
                 copyPriceLabel[index].setText(priceLabel.getText());
-                copyPriceLabel[index].setPreferredSize(priceLabel.getPreferredSize());
-                copyProductPanels.add(copyPriceLabel[index]);
+                newProductPanel.add(copyPriceLabel[index]);
 
                 copyProductPriceLabel[index] = new javax.swing.JLabel();
-                copyProductPriceLabel[index].setPreferredSize(productPriceLabel.getPreferredSize());
-                copyProductPriceLabel[index].setHorizontalAlignment(productPriceLabel.getHorizontalAlignment());
-                copyProductPriceLabel[index].setFont(productPriceLabel.getFont());
-                copyProductPriceLabel[index].setText(productData.get(categories).get(productName.get(index)) + " ฿");
-                copyProductPanels.add(copyProductPriceLabel[index]);
+                javax.swing.JLabel newProductPriceLabel = copyProductPriceLabel[index];
+                newProductPriceLabel.setPreferredSize(productPriceLabel.getPreferredSize());
+                newProductPriceLabel.setHorizontalAlignment(productPriceLabel.getHorizontalAlignment());
+                newProductPriceLabel.setFont(productPriceLabel.getFont());
+                newProductPriceLabel.setText(productData.get(categories).get(productName.get(index)) + "\u0E3F");
+                newProductPanel.add(newProductPriceLabel);
 
                 copyQtyLabel[index] = new javax.swing.JLabel();
                 copyQtyLabel[index].setFont(qtyLabel.getFont());
                 copyQtyLabel[index].setText(qtyLabel.getText());
                 copyQtyLabel[index].setPreferredSize(qtyLabel.getPreferredSize());
-                copyProductPanels.add(copyQtyLabel[index]);
+                newProductPanel.add(copyQtyLabel[index]);
 
                 copyProductQtySpinner[index] = new javax.swing.JSpinner();
-                copyProductQtySpinner[index].setFont(productQtySpinner.getFont());
-                copyProductQtySpinner[index].setPreferredSize(productQtySpinner.getPreferredSize());
-                copyProductPanels.add(copyProductQtySpinner[index]);
-                productListPartPanel.add(copyProductPanels);
-               
-                index++;
+                javax.swing.JSpinner newProductQtySpinner = copyProductQtySpinner[index];
+                newProductQtySpinner.setFont(productQtySpinner.getFont());
+                newProductQtySpinner.setPreferredSize(productQtySpinner.getPreferredSize());
+                newProductQtySpinner.addChangeListener(e -> {
+                    addReceiptDataMap(
+                            newProductQtySpinner,
+                            newProductNameLabel.getText(),
+                            (int) newProductQtySpinner.getValue()
+                    );
+                });
+                newProductPanel.add(newProductQtySpinner);
+                productListPartPanel.add(newProductPanel);
             }
             initData = false;
         } catch (URISyntaxException ex) {
-            callOptionPane("Error", ex.toString(), 0);
+            callOptionPane(ex.toString(), "Error", 0);
             System.exit(0);
         }
     }
 
-    public javax.swing.JLabel findLabelInPanel(javax.swing.JPanel panel, String text) {
-        for (java.awt.Component comp : panel.getComponents()) {
-            
-            System.out.println(comp);
-            if (comp instanceof javax.swing.JLabel label) {
-                if (text.equals(label.getText())) {
-                    return label; 
-                }
-            }
-
-            if (comp instanceof javax.swing.JPanel subPanel) {
-                javax.swing.JLabel result = findLabelInPanel(subPanel, text);
-                if (result != null) return result;
-            }
+    /**
+     * Adds or removes a product from the receipt data map when the quantity
+     * spinner changes.
+     *
+     * @param spinner the spinner component that triggered the change
+     * @param productName the name of the selected product
+     * @param quantity the selected quantity from spinner
+     */
+    public void addReceiptDataMap(javax.swing.JSpinner spinner, String productName, int quantity) {
+        if (quantity > 0) {
+            getReceiptData().put(productName, quantity);
+            /*
+            Add receipt data dynamically as the spinner value increases
+            showReceipt(); 
+             */
+        } else {
+            spinner.setValue(0);
+            getReceiptData().remove(productName);
         }
-        return null;
     }
 
-    
+    /**
+     * Generates a random product price between 50 and 200 Baht.
+     *
+     * @return random integer price
+     */
     private int randomPrice() {
         return new java.util.Random().nextInt(151) + 50;
     }
-   
+
+    /**
+     * Resizes the product list panel according to total number of product
+     * images.
+     *
+     * @param imgQty total number of image files
+     */
     private void resizePanel(int imgQty) {
         int col = 3; // defualt value
         int panelW = productPanelPrototype.getPreferredSize().width;
@@ -548,21 +683,31 @@ public class Main extends javax.swing.JFrame {
         int paddingX = 25;
         int paddingY = 25;
         int rows = (int) Math.ceil((double) imgQty / col);
-        int width  = (panelW + paddingX) * col;
+        int width = (panelW + paddingX) * col;
         int height = (panelH + paddingY) * rows;
         productListPartPanel.setPreferredSize(new java.awt.Dimension(width, height));
     }
-    
+
+    /**
+     * Counts all JPG images inside the given folder (including subfolders),
+     * collects their paths, and generates product data if needed.
+     *
+     * @param folder the directory to scan
+     * @return number of .jpg files found
+     */
     private int countImage(File folder) {
         int count = 0;
         File[] files = folder.listFiles();
-        if (files == null) return 0;
+        if (files == null) {
+            return 0;
+        }
 
         for (File file : files) {
+            // Folder
             if (file.isDirectory()) {
                 count += countImage(file);
-            } 
-            else {
+            } else {
+                // File
                 String extension = file.getName();
                 if (extension.toLowerCase().endsWith(".jpg")) {
                     String parent = file.getParentFile().getName();
@@ -578,19 +723,117 @@ public class Main extends javax.swing.JFrame {
         }
         return count;
     }
-    
+
+    /**
+     * Clears the UI panel and removes all products from view.
+     */
     private void clearData() {
         productListPartPanel.removeAll();
         productListPartPanel.revalidate();
         productListPartPanel.repaint();
         productImage.clear();
     }
-    
-    private void numberOnly(java.awt.event.KeyEvent evt) {
-        char val = evt.getKeyChar();
-        
-        if (!Character.isDigit(val)) {
-            evt.consume();
+
+    /**
+     * Resets all spinners to 0, clears the receipt data, and empties the
+     * receipt text area.
+     */
+    private void clearComponent() {
+        Arrays.stream(copyProductQtySpinner).forEach(spinner -> {
+            spinner.setValue(0);
+        });
+        orderDetailTextArea.setText("");
+        getReceiptData().clear();
+    }
+
+    /**
+     * Formats numbers with comma separators.
+     *
+     * @param val integer to format
+     * @return formatted string (e.g. 1,000)
+     */
+    private String numberFormat(int val) {
+        return new java.text.DecimalFormat("#,###").format(val);
+    }
+
+    /**
+     * Builds and displays the receipt text including ref number, product list,
+     * quantity, subtotal, and total price.
+     */
+    private void showReceipt() {
+        if (getReceiptData().size() != 0) {
+            total = new AtomicInteger(0);
+            refNumGen = ReferenceNumberGenerator.generateRefNumber();
+            orderDetailTextArea.setText(
+                    "Ref : " + getRefNumGen()
+                    + "\n______________________\n\n"
+            );
+            getReceiptData().forEach((receiptKey, receiptVal) -> {
+                orderDetailTextArea.append(
+                        receiptKey.length() <= 6
+                        ? receiptKey + "\t\tx" + numberFormat(receiptVal) + "\n\n"
+                        : receiptKey + "\tx" + numberFormat(receiptVal) + "\n\n"
+                );
+                productData.forEach((productKey, productVal) -> {
+                    productVal.forEach((innerKey, innerVal) -> {
+                        if (productKey.equals("All") && receiptKey.equals(innerKey)) {
+                            getTotal().addAndGet(innerVal * receiptVal);
+                        }
+                    });
+                });
+            });
+            orderDetailTextArea.append(
+                    "______________________\n\n"
+                    + "Total : \t"
+                    + numberFormat(getTotal().get())
+                    + "\u0E3F"
+            );
+            addDataButton.setEnabled(true);
+        } else {
+            orderDetailTextArea.setText("");
+            callOptionPane("Please select one order", "Alert", 2);
         }
+    }
+
+    /**
+     * @return the refNumGen
+     */
+    public String getRefNumGen() {
+        return refNumGen;
+    }
+
+    /**
+     * @return the total
+     */
+    public AtomicInteger getTotal() {
+        return total;
+    }
+
+    /**
+     * @return the receiptData
+     */
+    public Map<String, Integer> getReceiptData() {
+        return receiptData;
+    }
+
+    /**
+     * @return the showButton
+     */
+    public javax.swing.JButton getShowButton() {
+        return showButton;
+    }
+}
+
+class ReferenceNumberGenerator {
+
+    private static final SecureRandom secureRandom = new SecureRandom();
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyMMddhhmmss", Locale.getDefault());
+
+    public static String generateRefNumber() {
+        String timestampPart = sdf.format(new Date());
+        int randomPartInt = secureRandom.nextInt(10000);
+        String randomPart = String.format("%04d", randomPartInt);
+        return timestampPart + randomPart;
     }
 }
