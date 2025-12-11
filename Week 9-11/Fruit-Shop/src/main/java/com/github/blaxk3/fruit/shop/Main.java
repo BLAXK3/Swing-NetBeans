@@ -651,9 +651,9 @@ public class Main extends javax.swing.JFrame {
     public void addReceiptDataMap(javax.swing.JSpinner spinner, String productName, int quantity) {
         if (quantity > 0) {
             getReceiptData().put(productName, quantity);
-            /*
-            Add receipt data dynamically as the spinner value increases
-            showReceipt(); 
+            /**
+             * Add receipt data dynamically as the spinner value increases
+             * showReceipt(); 
              */
         } else {
             spinner.setValue(0);
@@ -662,7 +662,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     /**
-     * Generates a random product price between 50 and 200 Baht.
+     * Generates a random product price between 50 and 200
      *
      * @return random integer price
      */
@@ -671,8 +671,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     /**
-     * Resizes the product list panel according to total number of product
-     * images.
+     * Resizes the product list panel according to total number of product images
      *
      * @param imgQty total number of image files
      */
