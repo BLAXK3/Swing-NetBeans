@@ -826,10 +826,21 @@ public class Main extends javax.swing.JFrame {
 
 class ReferenceNumberGenerator {
 
+    /**
+     * SecureRandom instance for generating secure random numbers.
+     */
     private static final SecureRandom secureRandom = new SecureRandom();
 
+    /**
+     * Date format: yyMMddhhmmss (year, month, day, hour, minute, second).
+     */
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyMMddhhmmss", Locale.getDefault());
 
+    /**
+     * Generates a unique reference number using timestamp + 4-digit random number.
+     *
+     * @return a generated reference number string
+     */
     public static String generateRefNumber() {
         String timestampPart = sdf.format(new Date());
         int randomPartInt = secureRandom.nextInt(10000);
