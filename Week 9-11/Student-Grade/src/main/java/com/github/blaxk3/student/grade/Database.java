@@ -1,4 +1,5 @@
 package com.github.blaxk3.student.grade;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +15,15 @@ import java.sql.ResultSet;
 public class Database {
 
     private final Main main;
+    private final String dbName = "students"; // default 
+    private final String tableName = "student_grade"; // default 
+    private final String user = "Your-User";
+    private final String password = "Your-Password";
+    private final String port = "1433"; // default 
+    private final boolean encrypt = false; // default 
+    private final String serverUrl = "jdbc:sqlserver://localhost:"+ port +";encrypt=" + encrypt;
+    private final String dbUrl = "jdbc:sqlserver://localhost:"+ port +";databaseName=" + dbName + ";encrypt=" + encrypt;
+    
     public Database(Main main, char status) {
         this.main = main;
         if (status == 'a') {
@@ -24,33 +34,45 @@ public class Database {
         }
     }
 
-    public Connection connectDatabase() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Your-database-name;encrypt=true or false";
-        String user = "";
-        String password = "";
+    private Connection connectDatabase() {
+        Connection conn;
 
         try {
-            Connection conn = DriverManager.getConnection(url, user, password);
-            
-            try(ResultSet rs = conn.getMetaData().getTables(null, null, "student_grade", null)) {
+            conn = DriverManager.getConnection(serverUrl, user, password);
+
+            try (PreparedStatement ps = conn.prepareStatement("SELECT name FROM sys.databases WHERE name = ?")) {
+                ps.setString(1, dbName);
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    if (!rs.next()) {
+                        try (Statement st = conn.createStatement()) {
+                            st.executeUpdate("CREATE DATABASE " + dbName);
+                        }
+                    }
+                }
+            }
+            conn.close();
+            conn = DriverManager.getConnection(dbUrl, user, password);
+
+            try (ResultSet rs = conn.getMetaData().getTables(null, null, tableName, null)) {
 
                 if (!rs.next()) {
-                    String sql =
-                        "CREATE TABLE student_grade ("
-                        + "std_number INT IDENTITY(1,1) PRIMARY KEY, "
-                        + "std_id VARCHAR(20) NOT NULL, "
-                        + "first_name VARCHAR(20), "
-                        + "surname VARCHAR(20), "
-                        + "grade VARCHAR(2)"
-                        + ");";
+                    String createTable
+                            = "CREATE TABLE " + tableName + "("
+                            + "std_number INT IDENTITY(1,1) PRIMARY KEY, "
+                            + "std_id VARCHAR(20) NOT NULL, "
+                            + "first_name VARCHAR(20), "
+                            + "surname VARCHAR(20), "
+                            + "grade VARCHAR(2)"
+                            + ");";
 
-                    try(Statement stmt = conn.createStatement()) {
-                        stmt.executeUpdate(sql);
+                    try (Statement stmt = conn.createStatement()) {
+                        stmt.executeUpdate(createTable);
                     }
                 }
                 return conn;
             }
-            
         } catch (SQLException e) {
             main.callOptionPane(e.toString(), "Error", 0);
             System.exit(0);
